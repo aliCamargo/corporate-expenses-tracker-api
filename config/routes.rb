@@ -7,7 +7,14 @@ Rails.application.routes.draw do
 
     scope module: :v1, constraints: ApiConstraints.new( version: 1, default: :true ) do
       devise_for :users
-      resources :sessions, only: [:create, :destroy]
+      resources :sessions, only: [:create] do
+        collection do
+          delete :destroy
+          get :valid_token
+          get :me
+        end
+
+      end
     end
 
   end

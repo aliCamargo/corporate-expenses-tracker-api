@@ -12,21 +12,9 @@ module Authenticable
     current_user.present?
   end
 
-  def user_activated?
-    current_user.activated?
-  end
-
-  def user_pending?
-    current_user.pending?
-  end
-
   def authenticate_with_token!
     render json: { errors: 'Not authenticated' },
            status: :unauthorized unless user_signed_in?
   end
 
-  def account_deleted!
-    render json: { errors: 'Account deleted' },
-           status: :unauthorized unless user_activated? || user_pending?
-  end
 end

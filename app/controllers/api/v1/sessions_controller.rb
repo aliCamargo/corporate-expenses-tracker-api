@@ -1,7 +1,6 @@
 class Api::V1::SessionsController < Api::V1::ApiController
 
   skip_before_action :authenticate_with_token!, only: [:create, :valid_token, :forgot_password, :valid_forgot_password]
-  skip_before_action :account_deleted!, only: [:create, :valid_token, :forgot_password, :valid_forgot_password]
 
   # -- Log in User
   def create
@@ -12,7 +11,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
 
     if user && user.valid_password?( user_password )
       sign_in user, store: false
-      user.generate_authentication_token!
+      user.generate_access_token!
       user.save
 
       render json:{
@@ -39,9 +38,9 @@ class Api::V1::SessionsController < Api::V1::ApiController
   # -- validation access_token
   def valid_token
     json_web_token = TokenService.decode( params[:access_token] )
-    user = User.find_by( access_token: json_web_token['access_token'] )
+    user = json_web_token.present? ? User.find_by( access_token: json_web_token['access_token'] ) : nil
 
-    if user.nil? || user.deleted?
+    if user.nil?
       render json: {
           errors: {
               access_token: 'is invalid'
@@ -70,57 +69,6 @@ class Api::V1::SessionsController < Api::V1::ApiController
     if @user
       render json: @user,
              status: :ok
-    end
-  end
-
-  # -- Send code for remember password
-  def forgot_password
-    user = User.find_by_email( session_params[:email] )
-    if( user.present? )
-      user.send_reset_password_code
-      render json: {
-          success: {
-              code: 'send on your email'
-          }
-      }, status: :ok
-    else
-      render json: {
-          errors: {
-              email: 'no registered'
-          }
-      }, status: :accepted
-    end
-  end
-
-  # -- Add code for change password
-  def valid_forgot_password
-    user = User.find_by_forgot_password_code( params[:session][:code] )
-
-    if( user.present? )
-      if user.update( session_params )
-        sign_in user, store: false
-        user.generate_authentication_token!
-        user.forgot_password_code = nil
-        user.save
-
-        render json:{
-            message: 'Password changed successfully',
-            token:  TokenService.encode( { access_token: user.access_token } ),
-            user: UserSerializer.new(user).serializable_hash
-        },
-               status: :ok
-      else
-        render json: {
-            errors: user.errors
-        },
-        status: :accepted
-      end
-    else
-      render json: {
-          errors: {
-              code: 'invalid'
-          }
-      }, status: :accepted
     end
   end
 

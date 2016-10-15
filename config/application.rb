@@ -41,5 +41,7 @@ module CorporateExpressTracker
     # config.raise_errors_for_deprecations!
     config.api_only = true
 
+    config.filter_parameters += [:access_token]
+
   end
 end
