@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
-
+ruby '2.3.1'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
-
-gem 'rails-api'
-
 gem 'pg'
 
+gem 'devise'
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
