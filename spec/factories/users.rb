@@ -9,5 +9,6 @@ FactoryGirl.define do
     email                   { Faker::Internet.email }
     password                "12345678"
     password_confirmation   "12345678"
+    access_token            { Devise.friendly_token }
   end
 end
