@@ -33,6 +33,12 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::AdminController
     end
   end
 
+  def destroy
+    @user.destroy
+    head 204
+  end
+
+
   private
   def get_user
     @user ||= User.find(params[:id])

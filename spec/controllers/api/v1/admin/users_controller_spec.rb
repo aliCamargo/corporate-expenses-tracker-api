@@ -128,4 +128,15 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
     end
   end
 
+  describe 'DELTE #Destroy' do
+
+    it 'has a 204 status code' do
+      user = FactoryGirl.create :user
+      delete :destroy, params: { id: user.id }
+
+      expect(response).to have_http_status :no_content
+    end
+
+  end
+
 end
