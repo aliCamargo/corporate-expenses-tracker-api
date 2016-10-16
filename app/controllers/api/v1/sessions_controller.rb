@@ -31,7 +31,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
 
   # -- Log out User
   def destroy
-    @user.update_attribute(:access_token, nil)
+    @current_user.update_attribute(:access_token, nil)
     head 204
   end
 
@@ -66,8 +66,8 @@ class Api::V1::SessionsController < Api::V1::ApiController
 
   # -- Get a current user
   def me
-    if @user
-      render json: @user,
+    if @current_user
+      render json: @current_user,
              status: :ok
     end
   end

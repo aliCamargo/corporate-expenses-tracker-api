@@ -23,6 +23,16 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::AdminController
     end
   end
 
+  def update
+    if @user.update(user_params)
+      render json: @user,
+             status: :ok
+    else
+      render json: { errors: @user.errors },
+             status: :unprocessable_entity
+    end
+  end
+
   private
   def get_user
     @user ||= User.find(params[:id])

@@ -50,7 +50,7 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
         post :create, params: { user: @user_attributes }
       end
 
-      it 'renders the json representation for the product record just created' do
+      it 'renders the json representation for the user record just created' do
         user_response = json
         expect(user_response[:first_name]).to eql @user_attributes[:first_name]
       end
@@ -77,6 +77,49 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
 
       it 'renders the json errors on password why the user could not be created' do
         expect(@user_response[:errors][:password]).to include 'can\'t be blank'
+      end
+
+      it 'has a 422 status code' do
+        expect(response).to have_http_status :unprocessable_entity
+      end
+    end
+  end
+
+  describe 'PUT #update' do
+    before(:each) do
+      @user = FactoryGirl.create :user
+    end
+
+    context 'when is successfully updated' do
+
+      before(:each) do
+        @user_attributes = { email: 'new@email.com' }
+        put :update, params: { id: @user.id, user: @user_attributes }
+      end
+
+      it 'renders the json representation for the user record just updated' do
+        user_response = json
+        expect(user_response[:email]).to eql @user_attributes[:email]
+      end
+
+      it 'has a 200 status code' do
+        expect(response).to have_http_status :ok
+      end
+    end
+
+    context "when is not updated" do
+      before(:each) do
+        @invalid_user_attributes = { email: nil }
+        put :update, params: { id: @user.id, user: @invalid_user_attributes }
+        @user_response = json
+      end
+
+      it 'renders an errors json' do
+        expect(@user_response).to have_key(:errors)
+      end
+
+      it 'renders the json errors on email why the user could not be created' do
+        expect(@user_response[:errors][:email]).to include 'can\'t be blank'
       end
 
       it 'has a 422 status code' do
