@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
       end
 
-      namespace :admin, path: '/'  do
+      namespace :admin  do
 
         resources :users, :only => [:index, :show, :create, :update, :destroy]
 
