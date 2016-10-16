@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     scope module: :v1, constraints: ApiConstraints.new( version: 1, default: :true ) do
       devise_for :users
+
       resources :sessions, only: [:create] do
         collection do
           delete :destroy
@@ -15,6 +16,14 @@ Rails.application.routes.draw do
         end
 
       end
+
+      namespace :admin,
+                constraints: { subdomain: 'admin' }, path: '/'  do
+
+        resources :users, :only => [:show, :create, :update, :destroy]
+
+      end
+
     end
 
   end

@@ -18,4 +18,13 @@ module Authenticable
            status: :unauthorized unless user_signed_in?
   end
 
+  def user_admin?
+    current_user.admin?
+  end
+
+  def authenticate_as_an_admin!
+    render json: { errors: { role: 'Unauthorized' } },
+           status: :unauthorized unless user_admin?
+  end
+
 end
