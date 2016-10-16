@@ -2,7 +2,7 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::AdminController
   before_action :get_user, only: [:show, :update, :destroy]
 
   def index
-    users = User.where.not(id: @current_user.id )
+    users = User.where.not( id: @current_user.id )
     render json: {
         users: ActiveModelSerializers::SerializableResource.new(users)
     }

@@ -118,7 +118,7 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
         expect(@user_response).to have_key(:errors)
       end
 
-      it 'renders the json errors on email why the user could not be created' do
+      it 'renders the json errors on email why the user could not be updated' do
         expect(@user_response[:errors][:email]).to include 'can\'t be blank'
       end
 

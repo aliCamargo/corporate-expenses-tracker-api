@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       namespace :admin  do
 
         resources :users, :only => [:index, :show, :create, :update, :destroy]
+        resources :trips, :only => [:index, :show, :create, :update, :destroy]
 
       end
 

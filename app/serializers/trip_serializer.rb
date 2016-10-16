@@ -1,3 +1,4 @@
-class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :role, :gender
+class TripSerializer < ActiveModel::Serializer
+  attributes :id, :name, :description, :budget, :status
+  has_one :user
 end

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
-    first_name              { Faker::Internet.email }
-    last_name               { Faker::Internet.email }
+    first_name              { Faker::Name.first_name }
+    last_name               { Faker::Name.last_name }
     phone                   { Faker::PhoneNumber.cell_phone }
     address                 { Faker::Address.street_address }
     role                    { User.roles.keys.sample }

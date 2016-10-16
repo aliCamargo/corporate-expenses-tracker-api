@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
+  has_many :trips
+
   enum role: { admin: 0, employee: 1 }
   enum gender: { male: 0, female: 1 }
 
