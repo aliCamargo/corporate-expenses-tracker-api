@@ -1,4 +1,5 @@
 module Authenticable
+  extend ActiveSupport::Concern
 
   # Devise methods overwrites
   def current_user
@@ -13,7 +14,7 @@ module Authenticable
   end
 
   def authenticate_with_token!
-    render json: { errors: 'Not authenticated' },
+    render json: { errors: { token: 'Not authenticated' } },
            status: :unauthorized unless user_signed_in?
   end
 

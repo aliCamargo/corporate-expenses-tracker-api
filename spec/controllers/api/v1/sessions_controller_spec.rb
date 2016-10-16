@@ -15,7 +15,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
       it 'returns the user record corresponding to the given credentials' do
         @user.reload
         json = JSON.parse(response.body)
-        expect( json['token'] ).to eql TokenService.encode( { access_token: @user.access_token } )
+        expect( json['token'] ).to eql encode( @user.access_token )
       end
 
       it 'has a 200 status code' do
