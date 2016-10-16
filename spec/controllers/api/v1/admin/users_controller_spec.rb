@@ -25,6 +25,23 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
 
   end
 
+  describe 'GET #show' do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      get :show, params: { id: @user.id }
+    end
+
+    it 'returns first_name attribute of the user' do
+      user_response = json
+      expect(user_response[:first_name]).to eql  @user.first_name
+    end
+
+    it 'has a 200 status code' do
+      expect(response).to have_http_status :ok
+    end
+
+  end
+
   describe 'POST #create' do
     context 'when is successfully created' do
 

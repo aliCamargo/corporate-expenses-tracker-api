@@ -8,6 +8,10 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::AdminController
     }
   end
 
+  def show
+    render json: @user
+  end
+
   def create
     user = User.new(user_params)
     if user.save
