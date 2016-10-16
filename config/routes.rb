@@ -17,10 +17,9 @@ Rails.application.routes.draw do
 
       end
 
-      namespace :admin,
-                constraints: { subdomain: 'admin' }, path: '/'  do
+      namespace :admin, path: '/'  do
 
-        resources :users, :only => [:show, :create, :update, :destroy]
+        resources :users, :only => [:index, :show, :create, :update, :destroy]
 
       end
 

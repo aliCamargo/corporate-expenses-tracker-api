@@ -7,6 +7,24 @@ RSpec.describe Api::V1::Admin::UsersController, type: :controller do
     api_auth_header encode user.access_token
   end
 
+  describe 'GET #index' do
+    before(:each) do
+      5.times { FactoryGirl.create :user }
+      get :index
+    end
+
+    it 'returns 5 records from the database' do
+      users_response = json
+      count = User.count-1
+      expect(users_response[:users].count).to eq( count )
+    end
+
+    it 'has a 200 status code' do
+      expect(response).to have_http_status :ok
+    end
+
+  end
+
   describe 'POST #create' do
     context 'when is successfully created' do
 
