@@ -1,4 +1,4 @@
-class TripSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :budget, :status
-  has_one :user
+class ExpenseSerializer < ActiveModel::Serializer
+  attributes :id, :name, :note, :value
+  has_one :trip
 end

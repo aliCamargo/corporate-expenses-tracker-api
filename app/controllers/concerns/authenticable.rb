@@ -27,4 +27,13 @@ module Authenticable
            status: :unauthorized unless user_admin?
   end
 
+  def user_employee?
+    current_user.employee?
+  end
+
+  def authenticate_as_an_employee!
+    render json: { errors: { role: 'Unauthorized' } },
+           status: :unauthorized unless user_employee?
+  end
+
 end

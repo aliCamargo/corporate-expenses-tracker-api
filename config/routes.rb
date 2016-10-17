@@ -19,8 +19,16 @@ Rails.application.routes.draw do
 
       namespace :admin  do
 
-        resources :users, :only => [:index, :show, :create, :update, :destroy]
-        resources :trips, :only => [:index, :show, :create, :update, :destroy]
+        resources :users, only: [:index, :show, :create, :update, :destroy]
+        resources :trips, only: [:index, :show, :create, :update, :destroy]
+
+      end
+
+      namespace :employee  do
+
+        resources :trips, only: [:index, :show] do
+          resources :expenses, only: [:index, :show, :create, :update, :destroy]
+        end
 
       end
 
