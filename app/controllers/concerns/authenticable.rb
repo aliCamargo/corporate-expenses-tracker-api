@@ -19,7 +19,7 @@ module Authenticable
   end
 
   def user_admin?
-    current_user.admin?
+    current_user ? current_user.admin? : false
   end
 
   def authenticate_as_an_admin!
@@ -28,7 +28,7 @@ module Authenticable
   end
 
   def user_employee?
-    current_user.employee?
+    current_user ? current_user.employee? : false
   end
 
   def authenticate_as_an_employee!
