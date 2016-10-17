@@ -41,7 +41,7 @@ class Api::V1::Admin::TripsController < Api::V1::Admin::AdminController
 
 
   private
-  def get_trip
+  def get_user
     @user ||= User.find(params[:user_id])
   end
 
