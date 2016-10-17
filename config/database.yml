@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: corporate-express-tracker_production
-  username: corporate-express-tracker
+  host: <%= ENV['CORPORATE-EXPRESS-TRACKER_DATABASE_HOST'] %>
+  port: <%= ENV['CORPORATE-EXPRESS-TRACKER_DATABASE_PORT'] %>
+  database: <%= ENV['CORPORATE-EXPRESS-TRACKER_DATABASE_NAME'] %>
+  username: <%= ENV['CORPORATE-EXPRESS-TRACKER_DATABASE_USER'] %>
   password: <%= ENV['CORPORATE-EXPRESS-TRACKER_DATABASE_PASSWORD'] %>
