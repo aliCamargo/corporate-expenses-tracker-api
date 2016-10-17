@@ -8,9 +8,7 @@ class Expense < ApplicationRecord
   validates :trip, started: true
 
   def all_tags=(names)
-    self.tags = names.split(',').map do |name|
-      Tag.where(name: name.strip).first_or_create!
-    end
+    self.tags = names.split(',').map { |name| Tag.where(name: name.strip).first_or_create! } .uniq
   end
 
   def all_tags

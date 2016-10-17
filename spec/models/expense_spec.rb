@@ -50,4 +50,10 @@ RSpec.describe Expense, type: :model do
     expect(@expense.tags.pluck(:name)).to eql( 'tag 1, tag 2, tag 3'.split(', ') )
   end
 
+  it 'remove duplicate tags' do
+    @expense.all_tags = 'tag 1, tag 1, tag 1'
+    @expense.save
+    expect(@expense.tags.pluck(:name)).to eql( ['tag 1'] )
+  end
+
 end

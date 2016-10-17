@@ -56,7 +56,7 @@ class Api::V1::Employee::ExpensesController < Api::V1::Employee::EmployeeControl
   end
 
   def expense_params
-    params.require(:expense).permit( :name, :note, :value, :trip_id )
+    params.require(:expense).permit( :name, :note, :value, :trip_id, :all_tags )
   end
 
   def group_expenses( objects )
