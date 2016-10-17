@@ -38,4 +38,16 @@ RSpec.describe Expense, type: :model do
     @expense.valid?
     expect(@expense.errors[:value]).to include('must be greater than 0')
   end
+
+  it 'is valid insert tags' do
+    @expense.all_tags = 'tag 1, tag 2, tag 3'
+    expect(@expense).to be_valid
+  end
+
+  it 'get all tags' do
+    @expense.all_tags = 'tag 1, tag 2, tag 3'
+    @expense.save
+    expect(@expense.tags.pluck(:name)).to eql( 'tag 1, tag 2, tag 3'.split(', ') )
+  end
+
 end
