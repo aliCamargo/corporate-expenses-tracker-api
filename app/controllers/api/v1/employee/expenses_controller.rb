@@ -4,8 +4,14 @@ class Api::V1::Employee::ExpensesController < Api::V1::Employee::EmployeeControl
 
   def index
     expenses = @trip.expenses
+    if( params[:group].present? )
+      expenses = group_expenses( expenses )
+    else
+      expenses = ActiveModelSerializers::SerializableResource.new( expenses )
+    end
+
     render json: {
-        expenses: ActiveModelSerializers::SerializableResource.new(expenses)
+        expenses: expenses
     }
   end
 
@@ -51,6 +57,36 @@ class Api::V1::Employee::ExpensesController < Api::V1::Employee::EmployeeControl
 
   def expense_params
     params.require(:expense).permit( :name, :note, :value, :trip_id )
+  end
+
+  def group_expenses( objects )
+    objects = objects.sort_by(&:created_at).reverse
+    result = {}
+
+    unless objects.blank?
+      objects.each do |obj|
+
+        serializer_data = ExpenseSerializer.new(obj).serializable_hash
+
+        key =
+            if (obj.created_at <= Date.today.end_of_day && obj.created_at >= Date.today.beginning_of_day)
+              'today'
+            elsif (obj.created_at <= Date.yesterday.end_of_day && obj.created_at >= Date.yesterday.beginning_of_day)
+              'yesterday'
+            elsif (obj.created_at <= Date.tomorrow.end_of_day && obj.created_at >= Date.tomorrow.beginning_of_day)
+              'tomorrow'
+            else
+              I18n.l(obj.created_at, format: "%B %d")
+            end
+
+        result[key] = [] if result[key].blank?
+        result[key] << serializer_data
+
+      end
+    end
+
+    result
+
   end
 
 end

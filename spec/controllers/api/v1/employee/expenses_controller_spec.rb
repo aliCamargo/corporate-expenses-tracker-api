@@ -20,6 +20,13 @@ RSpec.describe Api::V1::Employee::ExpensesController, type: :controller do
       expect( expenses_response[:expenses].count ).to eq( count )
     end
 
+    it 'returns 5 records grouped by 1 day from the database' do
+      5.times { FactoryGirl.create :expense, trip_id: @trip.id }
+      get :index, params: { trip_id: @trip.id, group: true }
+      expenses_response = json
+      expect( expenses_response[:expenses].count ).to eql ( 1 )
+    end
+
     it 'has a 200 status code' do
       expect(response).to have_http_status :ok
     end
