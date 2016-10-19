@@ -13,9 +13,8 @@
     ])
     .run(appRun);
 
-    appRun.$inject =['$rootScope', '$state', '$filter', '$timeout', 'Restangular', 'toastr', 'BASE_URL', 'localStorage', 'SessionManagerFactory'];
-    function appRun( $rootScope, $state, $filter, $timeout, Restangular, toastr, BASE_URL, localStorage, SessionManagerFactory ) {
-        $rootScope.base_url = BASE_URL;
+    appRun.$inject =['$rootScope', '$state', '$filter', '$timeout', 'Restangular', 'toastr', 'localStorage', 'SessionManagerFactory'];
+    function appRun( $rootScope, $state, $filter, $timeout, Restangular, toastr, localStorage, SessionManagerFactory ) {
 
         $rootScope.logout = function(){
             SessionManagerFactory.Logout().then(
