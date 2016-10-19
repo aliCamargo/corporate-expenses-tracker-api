@@ -20,16 +20,17 @@
             SessionManagerFactory.Logout().then(
                     function(result){
                         $rootScope.current_user = null;
+                        localStorage.removeAll();
                         toastr.success("Logout correctly!");
                         $timeout(function() {
-                            $state.go('login');
+                            $state.go('login', {}, {reload:true});
                         }, 1200);
                     },
 
                     function(error){
                         toastr.error(error.error, "Error");
                         $timeout(function() {
-                            $state.go('login');
+                            $state.go('login', {}, {reload:true});
                         }, 1200);
                     }
                 );
@@ -39,13 +40,13 @@
             var isAuthenticated = SessionManagerFactory.isAuthenticated();
 
             if( !isAuthenticated && next.name != 'login'){
-                $state.go('login');
-                $rootScope.current_user = null;
+                $state.go('login',{}, {reload:true});
                 localStorage.removeAll();
+                $rootScope.current_user = null;
                 event.preventDefault();
             }else if( isAuthenticated ){
                 $rootScope.current_user = localStorage.getObject("user");
-
+                console.log('rootScope.current_user', $rootScope.current_user);
                 //-- If no have permission
                 if( next.session.role != $rootScope.current_user.role && next.session.role != 'all' ){
                     toastr.error('You no have permission', "Forbidden");
@@ -55,7 +56,7 @@
 
                 //-- Redirect to specifiq role
                 if(next.name == 'login'){
-                    $state.go( $rootScope.current_user.role );
+                    $state.go( $rootScope.current_user.role, {}, {reload:true} );
                     event.preventDefault();
                 }
             }
@@ -79,7 +80,7 @@
                         toastr.error(value, $filter('humanize')(key));
                     }
                 });
-                $state.go('login');
+                $state.go('login', {}, {reload:true});
 
                 return false; // error handled
             }

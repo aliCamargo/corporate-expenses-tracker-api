@@ -27,9 +27,9 @@ function appRoutes($stateProvider, $urlRouterProvider) {
                 role: 'admin', 
                 login: true
             },
-            children:[
-
-            ]
+            resolve: {
+                resolveCurrentUser: resolveCurrentUser
+            }
         })
 
             .state('admin.trips', {
@@ -59,6 +59,9 @@ function appRoutes($stateProvider, $urlRouterProvider) {
             session: {
                 role: 'employee', 
                 login: true
+            },
+            resolve: {
+                resolveCurrentUser: resolveCurrentUser
             }
         })
 
@@ -70,24 +73,10 @@ function appRoutes($stateProvider, $urlRouterProvider) {
                     role: 'employee',
                     login: true
                 }
-            })
+            });
 
 
-
-        // .state('home', {
-        //     url: '/home',
-        //     templateUrl: "views/home.html",
-        //     controller: "HomeController as vm"
-        // })
-        // .state('user', {
-        //     url: '/user',
-        //     templateUrl: "views/user.html",
-        //     controller: "UserController as vm"
-        // })
-        // .state('option', {
-        //     url: '/option',
-        //     templateUrl: "views/option.html",
-        //     controller: "OptionController as vm"
-        // });
-
+    function resolveCurrentUser($rootScope, localStorage){
+        $rootScope.current_user = localStorage.getObject('user');
+    }
 }

@@ -8,7 +8,6 @@
   ExpenseFactory.$inject = [ '$rootScope', '$q', 'Restangular', 'localStorage' ];
 
   function ExpenseFactory($rootScope, $q, Restangular, localStorage) {
-  	var baseServices = Restangular.all($rootScope.current_user.role + '/trips' );
 
       var factory = {
         save: save,
@@ -20,6 +19,7 @@
       return factory;
 
       function save(form, trip_id) {
+        var baseServices = Restangular.all($rootScope.current_user.role + '/trips' );
       	var token =  localStorage.getObject("access_token");
       	Restangular.setDefaultHeaders({Authorization: token});
 		
@@ -37,6 +37,7 @@
 
 
       function update(form, trip_id, id) {
+        var baseServices = Restangular.all($rootScope.current_user.role + '/trips' );
       	var token =  localStorage.getObject("access_token");
       	Restangular.setDefaultHeaders({Authorization: token});
 		
@@ -53,6 +54,7 @@
       }
 
       function get(trip_id) {
+        var baseServices = Restangular.all($rootScope.current_user.role + '/trips' );
       	var token =  localStorage.getObject("access_token");
       	Restangular.setDefaultHeaders({Authorization: token});
 		
@@ -69,6 +71,7 @@
       }
 
       function show(trip_id, id) {
+        var baseServices = Restangular.all($rootScope.current_user.role + '/trips' );
       	var token =  localStorage.getObject("access_token");
       	Restangular.setDefaultHeaders({Authorization: token});
 		
@@ -85,6 +88,7 @@
       }
 
       function remove(trip_id, id) {
+        var baseServices = Restangular.all($rootScope.current_user.role + '/trips' );
       	var token =  localStorage.getObject("access_token");
       	Restangular.setDefaultHeaders({Authorization: token});
 		
