@@ -1,0 +1,77 @@
+<!--
+  @author ctola
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>.: Corporate Expenses Tracker :.</title>
+    <!-- Fonts Icon material-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="bower_components/material-design-icons/iconfont/material-icons.css"> -->
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="lib/css/materialize.css">
+    <link rel="stylesheet" href="lib/css/angular-toastr.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+<body ng-app="app" ng-cloak>
+<header>
+    <nav class="teal">
+        <ul id="nav-mobile" class="side-nav fixed">
+            <li><a>{{current_user.short_name}}</a></li>
+
+            <li><a ui-sref="admin" ng-show="current_user.role == 'admin'">Home</a></li>
+            <li><a ui-sref="admin.trips" ng-show="current_user.role == 'admin'">Trips</a></li>
+            <li><a ui-sref="admin.tags" ng-show="current_user.role == 'admin'">Tags</a></li>
+
+            <li><a ui-sref="employee" ng-show="current_user.role == 'employee'">Home</a></li>
+
+            <li><a ng-click="logout()">Logout</a></li>
+        </ul>
+        <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-menuwidth="240" data-closeonclick="true">
+            <i class="mdi-navigation-menu material-icons">menu</i>
+        </a>
+    </nav>
+</header>
+<main>
+    <div ui-view></div>
+</main>
+<footer>
+    <div class="row"></div>
+</footer>
+    <!-- Javascript -->
+    <script src="lib/js/jquery.js"></script>
+    <script src="lib/js/angular.js"></script>
+    <script src="lib/js/angular-ui-router.js"></script>
+    <script src="lib/js/angular-resource.js"></script>
+    <script src="lib/js/materialize.js"></script>
+    <script src="lib/js/angular-materialize.js"></script>
+    <script src="lib/js/angular-toastr.min.js"></script>
+    <script src="lib/js/lodash.min.js"></script>
+    <script src="lib/js/restangular.min.js"></script>
+    <script src="js/core/module.core.js"></script>
+    <script src="js/core/constants.core.js"></script>
+    <script src="js/core/routes.core.js"></script>
+    <script src="js/app.module.js"></script>
+    <script src="js/config/app.config.js"></script>
+    <script src="js/filters/app.filter.js"></script>
+    <script src="js/factories/local.storage.factory.js"></script>
+    <script src="js/factories/session.manager.factory.js"></script>
+    <script src="js/factories/employees.factory.js"></script>
+    <script src="js/factories/trips.factory.js"></script>
+    <script src="js/factories/tags.factory.js"></script>
+    <script src="js/factories/expenses.factory.js"></script>
+    <script src="js/controllers/session.controller.js"></script>
+    <script src="js/controllers/admin.home.controller.js"></script>
+    <script src="js/controllers/admin.trip.controller.js"></script>
+    <script src="js/controllers/admin.tag.controller.js"></script>
+    <script src="js/controllers/employee.home.controller.js"></script>
+    <script src="js/controllers/employee.expense.controller.js"></script>
+    <!-- Javascript UI-->
+    <script>
+        //$(".button-collapse").sideNav();
+    </script>
+</body>
+</html>

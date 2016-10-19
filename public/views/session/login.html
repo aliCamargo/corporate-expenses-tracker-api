@@ -1,0 +1,33 @@
+<br>
+<div class="row">
+
+    <div class="card white col offset-m3 s12 m6">
+        <form ng-submit="vm.loginSubmit()" novalidate>
+            <div class="card-content">
+
+                <span class="card-title red-text">Login</span>
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" ng-model="vm.session.session.email" class="validate" required>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" ng-model="vm.session.session.password" class="validate" required>
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-action">
+                <button class="btn red">Send</button>
+            </div>
+        </form>
+
+    </div>
+</div>

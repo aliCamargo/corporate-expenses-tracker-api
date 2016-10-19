@@ -1,0 +1,30 @@
+<div ui-view>
+    <div class="row">
+        <div class="col s12 title">
+            <h3>Trips</h3>
+        </div>
+    </div>
+
+    <a class="btn-floating btn-fixed-add btn-large waves-effect waves-light red" href='#modal-new-employee' ng-click='vm.openModal = true' modal open="vm.openModal"><i class="material-icons">add</i> </a>
+
+    <div class="row">
+        <div class="col s12">
+
+            <ul class="collection">
+
+                <li class="collection-item avatar" ng-repeat="trip in vm.trips">
+                    <i ng-class="{'started': 'teal', 'finished': 'red'}[trip.status]" class="material-icons circle">airplanemode_active</i>
+                    <span class="title"><stron>Name: </stron>{{trip.name}}</span>
+                    <p><stron>Budget: </stron>{{trip.budget | currency : $ : 2}} <br/>
+                        <stron>User: </stron>{{trip.status | humanize}}
+                    </p>
+                    <a ui-sref="employee.expenses({trip_id: trip.id})" class="tertiary-content btn-floating" tooltipped data-position="bottom" data-tooltip="Show expenses"><i class="material-icons">receipt</i></a>
+                    <button ng-click="(trip.status == 'started') && vm.finishTrip(trip.id, $index)" ng-class="{'started': 'enabled', 'finished': 'disabled'}[trip.status]" class="secondary-content btn-floating red" tooltipped data-position="bottom" data-tooltip="Finish"><i class="material-icons">flight_land</i></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+

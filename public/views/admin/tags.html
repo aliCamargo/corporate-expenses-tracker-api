@@ -1,0 +1,31 @@
+<div ui-view>
+    <div class="row">
+        <div class="col s12 title">
+            <h3>Tags</h3>
+        </div>
+    </div>
+
+    <a class="btn-floating btn-fixed-add btn-large waves-effect waves-light red" href='#modal-new-employee' ng-click='vm.openModal = true' modal open="vm.openModal"><i class="material-icons">add</i> </a>
+
+    <div class="row">
+        <div class="col s12">
+
+            <ul class="collection">
+                <li class="collection-item" ng-repeat="tag in vm.tags | orderBy:'tagged' : true ">
+                    <div>
+                        {{tag.name}}<span class="badge secondary-content">{{tag.tagged}}</span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="collection">
+                <a href="#!" class="collection-item" >
+                    {{tag.name}}<span class="badge">{{tag.tagged}}</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
