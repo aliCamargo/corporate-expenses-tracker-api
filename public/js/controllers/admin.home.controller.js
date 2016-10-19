@@ -54,8 +54,6 @@
                             }else{
                                 toastr.error(value, $filter('humanize')(key));
                             }
-
-                            //console.log("a[" + index + "] = " + element);
                         });
                 }
             )

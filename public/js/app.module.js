@@ -46,7 +46,6 @@
                 event.preventDefault();
             }else if( isAuthenticated ){
                 $rootScope.current_user = localStorage.getObject("user");
-                console.log('rootScope.current_user', $rootScope.current_user);
                 //-- If no have permission
                 if( next.session.role != $rootScope.current_user.role && next.session.role != 'all' ){
                     toastr.error('You no have permission', "Forbidden");
@@ -86,7 +85,6 @@
             }
 
             if( response.status === 403 ){
-                 console.log( response )
                 toastr.error('You role no have permission for access to :' + response.config.method + ' ' + response.config.url, "Forbidden");
             }
             return true; // error not handled

@@ -19,12 +19,10 @@
         vm.loginSubmit = function (){
             SessionManagerFactory.Login(vm.session).then(
                 function(result){
-                    console.log(result)
                     localStorage.removeAll();
                     if( result.errors ){
                         toastr.error(result.errors.message);
                     }else{
-                        console.log(result);
                         localStorage.setObject('access_token', result.token);
                         localStorage.setObject('user', result.user);
                         toastr.success("Login successfully!");
