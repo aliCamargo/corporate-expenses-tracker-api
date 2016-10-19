@@ -8,4 +8,7 @@ class Trip < ApplicationRecord
   validates :budget, numericality: { greater_than: 0 }
   validates :user, employee: true, single_started: true, if: Proc.new { |t| t.new_record? }
 
+	def refund
+		self.budget - self.expenses.sum("value")
+	end
 end
