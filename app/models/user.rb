@@ -20,4 +20,8 @@ class User < ApplicationRecord
   def short_name
     "#{self.first_name.first.upcase}. #{self.last_name.downcase.titleize}"
   end
+
+  def full_name
+    "#{self.first_name.downcase.titleize} #{self.last_name.downcase.titleize}"
+  end
 end
