@@ -23,8 +23,8 @@ module Authenticable
   end
 
   def authenticate_as_an_admin!
-    render json: { errors: { role: 'Unauthorized' } },
-           status: :unauthorized unless user_admin?
+    render json: { errors: { role: 'no have permission' } },
+           status: :forbidden unless user_admin?
   end
 
   def user_employee?
@@ -32,8 +32,8 @@ module Authenticable
   end
 
   def authenticate_as_an_employee!
-    render json: { errors: { role: 'Unauthorized' } },
-           status: :unauthorized unless user_employee?
+    render json: { errors: { role: 'no have permission' } },
+           status: :forbidden unless user_employee?
   end
 
 end
