@@ -21,15 +21,15 @@
         <ul id="nav-mobile" class="side-nav fixed">
             <li><a>{{current_user.short_name}}</a></li>
 
-            <li><a ui-sref="admin" ng-show="current_user.role == 'admin'">Home</a></li>
-            <li><a ui-sref="admin.trips" ng-show="current_user.role == 'admin'">Trips</a></li>
-            <li><a ui-sref="admin.tags" ng-show="current_user.role == 'admin'">Tags</a></li>
+            <li ng-show="current_user.role == 'admin'"><a ui-sref="admin">Home</a></li>
+            <li ng-show="current_user.role == 'admin'"><a ui-sref="admin.trips">Trips</a></li>
+            <li ng-show="current_user.role == 'admin'"><a ui-sref="admin.tags">Tags</a></li>
 
-            <li><a ui-sref="employee" ng-show="current_user.role == 'employee'">Home</a></li>
+            <li ng-show="current_user.role == 'employee'" ><a ui-sref="employee">Home</a></li>
 
-            <li><a ng-click="logout()">Logout</a></li>
+            <li ng-hide="!current_user"><a ng-click="logout()">Logout</a></li>
         </ul>
-        <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-menuwidth="240" data-closeonclick="true">
+        <a href="#" class="button-collapse" data-activates="nav-mobile" data-sidenav="left" data-menuwidth="240" data-closeonclick="false">
             <i class="mdi-navigation-menu material-icons">menu</i>
         </a>
     </nav>
