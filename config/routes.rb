@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
       namespace :employee  do
 
-        resources :trips, only: [:index, :show] do
+        resources :trips, only: [:index, :show, :update] do
           resources :expenses, only: [:index, :show, :create, :update, :destroy]
         end
 
